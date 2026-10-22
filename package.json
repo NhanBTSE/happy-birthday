@@ -1,0 +1,13 @@
+{
+  "name": "happy-birthday-website",
+  "version": "1.0.0",
+  "description": "Website chúc mừng sinh nhật người yêu siêu dễ thương và lãng mạn",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": ["birthday", "romantic", "love", "gallery"],
+  "author": "With Love",
+  "license": "MIT"
+}

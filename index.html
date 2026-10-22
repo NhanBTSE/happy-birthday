@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chúc Mừng Sinh Nhật Người Yêu Dấu Của Anh 💕</title>
+  <meta name="description" content="Trang web chúc mừng sinh nhật ngọt ngào, lãng mạn dành riêng cho người yêu với góc kỷ niệm ảnh, thổi nến và thư tình.">
+  
+  <!-- Google Fonts: Quicksand for cute readable text, Dancing Script & Pacifico for romantic cursive -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <!-- LZ-String for compact, URL-safe data encoding in share link -->
+  <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Canvas for floating romantic ambient particles -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Top Floating Header -->
+  <header class="floating-header" id="floating-header">
+    <div class="logo-pill" id="header-logo-pill">
+      <span class="heart-pulse">💖</span>
+      <span id="header-title-text">Happy Birthday My Love</span>
+    </div>
+
+    <!-- Recipient view banner when opened by lover -->
+    <div class="lover-view-badge hidden" id="lover-view-badge">
+      <span class="heart-pulse">💖</span>
+      <span class="badge-text">Dành tặng <strong id="header-lover-name">Em Yêu</strong> từ <strong id="header-author-name">Anh</strong> 💕</span>
+    </div>
+
+    <div class="header-actions">
+      <!-- Music toggle button -->
+      <button id="music-toggle-btn" class="cute-btn circle-btn" title="Bật / Tắt nhạc du dương" aria-label="Bật hoặc tắt nhạc">
+        <span class="icon" id="music-icon">🎵</span>
+      </button>
+      
+      <!-- Custom song upload button (Creator only) -->
+      <label for="custom-audio-input" class="cute-btn circle-btn creator-only-btn" title="Chọn nhạc MP3 của bạn" aria-label="Tải lên nhạc riêng">
+        <span class="icon">🎼</span>
+        <input type="file" id="custom-audio-input" accept="audio/*" style="display: none;">
+      </label>
+
+      <!-- Preview toggle button (Creator only) -->
+      <button id="preview-mode-btn" class="cute-btn preview-pill-btn creator-only-btn" title="Xem thử giao diện như người yêu sẽ thấy">
+        <span class="icon">👁️</span>
+        <span class="btn-text">Xem thử</span>
+      </button>
+
+      <!-- Edit details button (Creator only) -->
+      <button id="open-settings-btn" class="cute-btn edit-pill-btn creator-only-btn" title="Chỉnh sửa tên và lời chúc">
+        <span class="icon">✍️</span>
+        <span class="btn-text">Chỉnh sửa</span>
+      </button>
+
+      <!-- Share link for lover button (Creator only) -->
+      <button id="share-link-btn" class="cute-btn share-pill-btn creator-only-btn" title="Tạo link gửi cho người yêu (chỉ xem, không sửa được)">
+        <span class="icon">🎁</span>
+        <span class="btn-text">Gửi người yêu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Notification Banner for Creator when in Preview Mode -->
+  <div class="preview-mode-bar hidden" id="preview-mode-bar">
+    <span>👁️ Bạn đang xem thử giao diện ở Chế Độ Chỉ Xem (như người yêu sẽ thấy).</span>
+    <button id="exit-preview-btn" class="exit-preview-btn">Quay lại chỉnh sửa</button>
+  </div>
+
+  <!-- Main Container -->
+  <main class="page-container">
+    
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+      <div class="sparkle-badge animate-bounce-slow">
+        <span>✨ Hôm nay là ngày đặc biệt nhất năm ✨</span>
+      </div>
+      
+      <h1 class="main-title">
+        Chúc Mừng Sinh Nhật <br>
+        <span class="highlight-name" id="display-lover-name">Em Bé Đáng Yêu</span> 🎂
+      </h1>
+
+      <p class="subtitle" id="display-tagline">
+        Cảm ơn em vì đã đến và làm thế giới của anh trở nên dịu dàng, ấm áp và ngập tràn hạnh phúc! 🌸
+      </p>
+
+      <!-- Romantic Countdown / Days Together Counter -->
+      <div class="love-counter-card glass-panel">
+        <div class="counter-item">
+          <span class="counter-number" id="counter-years">1 năm</span>
+          <span class="counter-label">Năm yêu nhau</span>
+        </div>
+        <div class="counter-divider">💖</div>
+        <div class="counter-item">
+          <span class="counter-number" id="counter-days">365 ngày</span>
+          <span class="counter-label">Ngày bên em</span>
+        </div>
+        <div class="counter-divider">💖</div>
+        <div class="counter-item">
+          <span class="counter-number" id="counter-wishes">1000+</span>
+          <span class="counter-label">Nụ cười nụ hôn</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Birthday Cake Section -->
+    <section class="cake-ceremony-section text-center">
+      <div class="section-badge">🎂 Nghi thức ước nguyện</div>
+      <h2 class="section-title">Nhắm Mắt Lại, Ước Một Điều Nhé!</h2>
+      <p class="section-desc">Hãy gửi gắm điều ước ngọt ngào nhất của em vào những ngọn nến lung linh này nha...</p>
+
+      <div class="cake-wrapper">
+        <div class="cake-container" id="birthday-cake">
+          <!-- Plate -->
+          <div class="cake-plate"></div>
+          
+          <!-- Cake Layers -->
+          <div class="cake-layer layer-bottom">
+            <div class="cream-drip"></div>
+            <div class="strawberry s1">🍓</div>
+            <div class="strawberry s2">🍓</div>
+            <div class="strawberry s3">🍓</div>
+          </div>
+          <div class="cake-layer layer-top">
+            <div class="cream-frosting"></div>
+            <div class="decor-heart d1">💕</div>
+            <div class="decor-heart d2">✨</div>
+          </div>
+
+          <!-- Candle & Flames -->
+          <div class="candle" id="main-candle">
+            <div class="candle-stick"></div>
+            <div class="candle-flame" id="candle-flame">
+              <div class="flame-core"></div>
+              <div class="flame-glow"></div>
+            </div>
+            <div class="smoke" id="candle-smoke"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blow Candle Controls -->
+      <div class="cake-actions">
+        <button id="blow-candle-btn" class="cute-btn magic-glow-btn">
+          <span class="icon">💨</span> Thổi Nến Ngay Nào!
+        </button>
+        <button id="relight-candle-btn" class="cute-btn outline-btn" style="display: none;">
+          <span class="icon">🕯️</span> Thắp lại nến
+        </button>
+      </div>
+      
+      <div id="cake-wish-message" class="cake-wish-banner hidden">
+        🎉 Điều ước của em chắc chắn sẽ thành hiện thực! Anh yêu em rất nhiều! 💖
+      </div>
+    </section>
+
+    <!-- Polaroid Photo Gallery Section -->
+    <section class="gallery-section">
+      <div class="text-center">
+        <div class="section-badge">📸 Kỷ niệm ngọt ngào</div>
+        <h2 class="section-title">Những Khoảnh Khắc Của Đôi Mình</h2>
+        <p class="section-desc">Mỗi bức ảnh là một mảnh ghép tình yêu xinh đẹp nhất mà anh luôn nâng niu gìn giữ ✨</p>
+      </div>
+
+      <!-- Add Photo Bar (Creator only) -->
+      <div class="gallery-toolbar glass-panel creator-only-block" id="gallery-toolbar">
+        <div class="toolbar-info">
+          <span class="photo-count-badge" id="photo-count-badge">4 bức ảnh</span>
+          <span class="tip-text">💡 Bạn có thể tải ảnh lên hoặc thêm đường dẫn ảnh trong mục "Chỉnh sửa" nhé!</span>
+        </div>
+        <div class="toolbar-buttons">
+          <label for="photo-file-input" class="cute-btn primary-btn add-photo-btn">
+            <span class="icon">➕</span> Tải Ảnh Lên
+            <input type="file" id="photo-file-input" accept="image/*" multiple style="display: none;">
+          </label>
+        </div>
+      </div>
+
+      <!-- Polaroid Pinboard Grid -->
+      <div class="polaroid-grid" id="polaroid-gallery-container">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Love Letter Section -->
+    <section class="letter-section text-center">
+      <div class="section-badge">💌 Bức thư tình bí mật</div>
+      <h2 class="section-title">Gửi Đến Người Anh Yêu Nhất</h2>
+      <p class="section-desc">Có những điều từ tận đáy tim mà anh luôn muốn thủ thỉ cùng em...</p>
+
+      <div class="envelope-wrapper">
+        <div class="envelope" id="love-envelope">
+          <div class="envelope-flap" id="envelope-flap"></div>
+          <div class="envelope-pocket"></div>
+          
+          <!-- Heart Seal -->
+          <div class="wax-seal" id="wax-seal" title="Bấm để mở thư tình">
+            <span class="seal-heart">💌</span>
+            <span class="seal-hint">Chạm để mở</span>
+          </div>
+
+          <!-- The Paper Inside -->
+          <div class="letter-paper" id="letter-paper">
+            <div class="letter-header">
+              <span class="letter-date" id="letter-date-display">Hôm nay, ngày đặc biệt</span>
+              <span class="letter-stamp">💌 FROM MY HEART</span>
+            </div>
+            <div class="letter-salutation">
+              Gửi <span id="letter-lover-name" class="handwritten-name">Em Yêu</span> của anh,
+            </div>
+            <div class="letter-body" id="letter-text-content">
+              <!-- Animated typewriter text will appear here -->
+            </div>
+            <div class="letter-signature">
+              <span>Mãi yêu em,</span>
+              <strong id="letter-author-name">Người yêu của em</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sweet Balloon Pop Game / Love Vouchers -->
+    <section class="vouchers-section text-center">
+      <div class="section-badge">🎈 Trò chơi bong bóng</div>
+      <h2 class="section-title">Vỡ Bong Bóng Nhận Quà Tình Yêu</h2>
+      <p class="section-desc">Bấm vào từng quả bóng bay để nhận phiếu quà tặng tình yêu độc quyền từ anh nha! 🎁</p>
+
+      <div class="balloons-field" id="balloons-container">
+        <!-- Generated by JavaScript with cute pastel colors -->
+      </div>
+
+      <!-- Unlocked Vouchers Shelf -->
+      <div class="vouchers-collection-box glass-panel">
+        <h3 class="vouchers-box-title">🎁 Bộ Sưu Tập Phiếu Tình Yêu Đã Mở (<span id="unlocked-count">0</span>/6)</h3>
+        <div class="vouchers-list" id="vouchers-list">
+          <p class="empty-voucher-hint">Hãy chọc vỡ các quả bóng bay phía trên để khám phá quà tặng nhé! ✨</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Romantic Quote & Footer -->
+    <footer class="romantic-footer text-center">
+      <div class="footer-decoration">
+        <span>🌸</span> <span>🌷</span> <span>✨</span> <span>🎂</span> <span>✨</span> <span>🌷</span> <span>🌸</span>
+      </div>
+      <p class="footer-quote">
+        "Trời có vạn vì sao lấp lánh, nhưng với anh, nụ cười của em là ánh sáng rực rỡ nhất."
+      </p>
+      <p class="copyright">
+        Được thiết kế với cả trái tim ❤️ dành cho <span id="footer-lover-name">Em Bé</span>
+      </p>
+
+      <!-- Secret edit link for creator if opened in view mode -->
+      <div class="creator-secret-box" id="creator-secret-box">
+        <button id="secret-edit-btn" class="secret-edit-btn" title="Chỉnh sửa lại nội dung nếu bạn là người tạo">
+          ✍️ Bạn là người gửi? Bấm vào đây để chỉnh sửa lại
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Photo Lightbox Modal -->
+  <div class="modal-overlay hidden" id="photo-lightbox-modal">
+    <div class="lightbox-card glass-panel animate-scale-up">
+      <button class="modal-close-btn" id="close-lightbox-btn" aria-label="Đóng">✕</button>
+      <div class="lightbox-image-box">
+        <img id="lightbox-img" src="" alt="Ảnh kỷ niệm">
+      </div>
+      <div class="lightbox-caption-area">
+        <p class="lightbox-caption" id="lightbox-caption-text"></p>
+        <span class="lightbox-date" id="lightbox-date-text"></span>
+      </div>
+      <div class="lightbox-nav">
+        <button id="lightbox-prev-btn" class="nav-arrow-btn" aria-label="Ảnh trước">‹</button>
+        <button id="lightbox-delete-btn" class="cute-btn danger-btn creator-only-btn" title="Xóa ảnh này">🗑️ Xóa ảnh</button>
+        <button id="lightbox-next-btn" class="nav-arrow-btn" aria-label="Ảnh sau">›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings / Customization Modal (Creator only) -->
+  <div class="modal-overlay hidden" id="settings-modal">
+    <div class="settings-card glass-panel animate-scale-up">
+      <div class="settings-header">
+        <h3>✨ Tùy Chỉnh Lời Chúc & Nội Dung Trang Web</h3>
+        <button class="modal-close-btn" id="close-settings-btn" aria-label="Đóng">✕</button>
+      </div>
+      
+      <form id="settings-form" class="settings-form">
+        <!-- Tab navigation -->
+        <div class="settings-tabs">
+          <button type="button" class="tab-btn active" data-tab="tab-general">💌 Thông Tin & Thư Tình</button>
+          <button type="button" class="tab-btn" data-tab="tab-photos">📸 Ảnh Kỷ Niệm</button>
+        </div>
+
+        <!-- Tab 1: General Info & Letter -->
+        <div class="tab-content active" id="tab-general">
+          <div class="form-group">
+            <label for="input-lover-name">Tên / Biệt danh của người yêu:</label>
+            <input type="text" id="input-lover-name" placeholder="VD: Bé Heo, Công Chúa Của Anh, Mai Anh..." required>
+          </div>
+
+          <div class="form-group">
+            <label for="input-author-name">Tên của bạn (người gửi):</label>
+            <input type="text" id="input-author-name" placeholder="VD: Anh Yêu Của Em, Hoàng..." required>
+          </div>
+
+          <div class="form-group">
+            <label for="input-tagline">Lời nhắn ngắn dưới tiêu đề:</label>
+            <input type="text" id="input-tagline" placeholder="Lời nhắn ngắn gọn dễ thương...">
+          </div>
+
+          <div class="form-group">
+            <label for="input-days-together">Số ngày yêu nhau (hoặc số ngày bên nhau):</label>
+            <input type="number" id="input-days-together" placeholder="VD: 520, 365, 100...">
+          </div>
+
+          <div class="form-group">
+            <label for="input-letter-body">Nội dung bức thư tình (chạm vào trái tim):</label>
+            <textarea id="input-letter-body" rows="6" placeholder="Viết những lời chân thành nhất gửi đến người yêu..."></textarea>
+          </div>
+        </div>
+
+        <!-- Tab 2: Photos Manager -->
+        <div class="tab-content" id="tab-photos">
+          <div class="photos-manager-intro">
+            <p>💡 Thêm ảnh kỷ niệm của hai bạn bằng cách dán link ảnh online hoặc tải ảnh lên từ máy:</p>
+          </div>
+
+          <div class="add-photo-url-box">
+            <div class="form-group">
+              <label for="input-new-photo-url">Thêm link ảnh online (Imgur, Facebook, Postimages...):</label>
+              <div class="input-with-btn">
+                <input type="url" id="input-new-photo-url" placeholder="https://example.com/anh_ky_niem.jpg">
+                <button type="button" id="btn-add-photo-url" class="cute-btn primary-btn">➕ Thêm</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="photos-preview-list" id="settings-photos-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="settings-actions">
+          <button type="button" id="reset-defaults-btn" class="cute-btn outline-btn">Khôi phục mặc định</button>
+          <button type="submit" class="cute-btn primary-btn">Lưu Thay Đổi 💾</button>
+          <button type="button" id="btn-save-and-share" class="cute-btn share-pill-btn">💖 Tạo Link Gửi Người Yêu 🎁</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Share Link Generator Modal -->
+  <div class="modal-overlay hidden" id="share-link-modal">
+    <div class="share-card glass-panel animate-scale-up">
+      <div class="share-header">
+        <div class="share-title-box">
+          <span class="share-icon">🎁</span>
+          <h3>Link Quà Tặng Đã Sẵn Sàng!</h3>
+        </div>
+        <button class="modal-close-btn" id="close-share-modal-btn" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="share-body">
+        <p class="share-desc">
+          Link này đã được khóa ở <strong>Chế Độ Chỉ Xem</strong> và chứa toàn bộ thông tin bạn đã chỉnh sửa.
+        </p>
+
+        <div class="share-features-box">
+          <div class="feature-item">
+            <span class="check-icon">🌐</span>
+            <div>
+              <strong>Không cần cùng Wi-Fi:</strong>
+              <p>Người yêu bạn dùng 4G, ở xa, hay dùng bất kỳ mạng nào cũng mở được ngay!</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="check-icon">🔒</span>
+            <div>
+              <strong>Chỉ được bấm vào xem (Không được sửa):</strong>
+              <p>Các nút chỉnh sửa, xóa ảnh, đổi tên đều bị ẩn hoàn toàn đối với người yêu.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="check-icon">✨</span>
+            <div>
+              <strong>Đầy đủ trải nghiệm lãng mạn:</strong>
+              <p>Thổi nến sinh nhật 🎂, mở thư tình 💌, vỡ bong bóng nhận phiếu quà 🎈 và nhạc du dương 🎶!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="share-input-group">
+          <input type="text" id="share-link-input" readonly>
+          <button type="button" id="copy-share-link-btn" class="cute-btn primary-btn copy-btn">
+            <span class="icon" id="copy-btn-icon">📋</span>
+            <span id="copy-btn-text">Sao chép Link</span>
+          </button>
+        </div>
+
+        <div id="copy-toast" class="copy-toast hidden">
+          💖 Đã sao chép link thành công! Hãy dán và gửi cho người yêu qua Zalo, Messenger, iMessage nha!
+        </div>
+
+        <div class="share-modal-footer">
+          <a href="#" id="test-share-link-btn" target="_blank" class="cute-btn outline-btn">
+            🚀 Mở xem thử link này
+          </a>
+          <button type="button" id="close-share-modal-btn2" class="cute-btn secondary-btn">
+            Xong rồi 💕
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Welcome Greeting Modal for Lover (appears when opened via share link) -->
+  <div class="modal-overlay hidden" id="welcome-gift-modal">
+    <div class="welcome-card glass-panel animate-scale-up text-center">
+      <div class="welcome-gift-box animate-bounce-slow">
+        🎁
+      </div>
+      <div class="sparkle-badge">
+        <span>✨ Có một món quà đặc biệt dành cho em ✨</span>
+      </div>
+      <h2 class="welcome-title">
+        Gửi <span id="welcome-lover-name" class="highlight-name">Em Yêu</span> 💕
+      </h2>
+      <p class="welcome-desc">
+        Hôm nay là ngày tuyệt vời nhất vì là sinh nhật của em! <br>
+        <strong id="welcome-author-name">Anh người yêu</strong> đã tự tay chuẩn bị món quà ngọt ngào này tặng em.
+      </p>
+      <button id="open-gift-btn" class="cute-btn magic-glow-btn open-gift-btn">
+        <span>✨ Bấm Vào Đây Để Mở Quà & Bật Nhạc 🎶</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Audio Element (for fallback or custom user uploads) -->
+  <audio id="custom-audio-player" loop preload="auto"></audio>
+
+  <!-- Load user configuration -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

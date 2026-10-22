@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="400" viewBox="0 0 500 400">
+  <defs>
+    <linearGradient id="cake" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#e11d48"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="400" fill="url(#cake)"/>
+  <circle cx="250" cy="160" r="85" fill="#ffffff" opacity="0.2"/>
+  <text x="250" y="175" font-size="70" text-anchor="middle">🎂</text>
+  <text x="250" y="275" font-family="'Quicksand', sans-serif" font-weight="bold" font-size="22" fill="#ffffff" text-anchor="middle">Happy Birthday My Love</text>
+  <text x="250" y="305" font-family="'Quicksand', sans-serif" font-size="15" fill="#fff1f2" text-anchor="middle">Ngày thiên thần đáng yêu nhất thế gian chào đời</text>
+</svg>

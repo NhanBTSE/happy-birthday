@@ -1,50 +1,47 @@
-# 🎂 Hướng Dẫn Mở Website Trên Điện Thoại, MacBook & Đưa Lên Mạng 💕
+# 🎂 Website Chúc Mừng Sinh Nhật Người Yêu Siêu Ngọt Ngào & Lãng Mạn 💕
+
+> Website đã được đưa lên mạng public thành công trên GitHub Pages của bạn!  
+> Bất kỳ ai mở link cũng xem được mượt mà trên iPhone, Android, MacBook hay PC mà **không cần cùng mạng Wi-Fi** (hỗ trợ cả 4G, 5G).
 
 ---
 
-## 📱 CÁCH 1: Xem ngay trên Điện Thoại / MacBook (Cùng Wi-Fi)
+## 🔗 ĐƯỜNG LINK PUBLIC CỦA BẠN
 
-1. Máy tính của bạn đang chạy lệnh:
-   ```bash
-   npm run dev
-   ```
-2. Trên điện thoại (iPhone, Android) hoặc MacBook, mở trình duyệt **Safari** hoặc **Chrome** và truy cập:
-   👉 **http://10.1.132.243:3000**
-
-*(Yêu cầu: Điện thoại / MacBook kết nối cùng mạng Wi-Fi với máy tính).*
-
----
-
-## 🌐 CÁCH 2: Đưa lên mạng miễn phí để gửi Link cho người yêu (Xem được bất kỳ đâu bằng 4G/Wi-Fi)
-
-Để người yêu của bạn ở bất kỳ đâu chỉ cần bấm vào link (qua Zalo, Messenger, iMessage) là mở được ngay:
-
-### 👉 Cách siêu nhanh với Netlify Drop (Không cần đăng ký phức tạp, 15 giây là xong):
-1. Mở trình duyệt vào trang: **https://app.netlify.com/drop**
-2. Kéo thả cả thư mục `happybirthday` từ máy tính thả vào ô giữa màn hình của Netlify.
-3. Chờ 5 - 10 giây, Netlify sẽ tạo cho bạn một đường link miễn phí (ví dụ: `https://chuc-mung-sinh-nhat-em-yeu.netlify.app`).
-4. Gửi link này cho người yêu là xong!
+### 1. ✍️ Link Chỉnh Sửa Dành Riêng Cho Bạn (Người Gửi):
+👉 **[https://nhanbtse.github.io/happy-birthday/](https://nhanbtse.github.io/happy-birthday/)**
+- Bạn mở link này trên máy tính hoặc điện thoại của mình.
+- Bấm nút **"✍️ Chỉnh sửa"** ở góc trên để đổi:
+  - Tên/biệt danh người yêu
+  - Tên của bạn
+  - Lời nhắn, số ngày yêu nhau
+  - Bức thư tình bí mật
+  - Thêm ảnh kỷ niệm (dán link ảnh hoặc tải ảnh lên)
+- Sau khi chỉnh sửa xong, bấm nút **"🎁 Gửi người yêu"** (hoặc "Tạo Link Gửi Người Yêu").
+- Hệ thống sẽ tự động sao chép một **Link Quà Tặng Đã Được Khóa**.
 
 ---
 
-## 📸 CÁCH CỐ ĐỊNH ẢNH CỦA 2 BẠN (Để người yêu mở lên là thấy ngay)
+### 2. 💖 Link Dành Cho Người Yêu (Chỉ Xem - Không Thể Sửa):
+- Khi người yêu bạn nhận được link và bấm vào:
+  - ✅ **Mở được ở mọi nơi** bằng 4G hoặc Wi-Fi bất kỳ.
+  - 🔒 **Được bảo vệ tuyệt đối:** Các nút chỉnh sửa, xóa ảnh, đổi tên đều bị ẩn hoàn toàn! Người yêu **chỉ được xem và trải nghiệm**.
+  - 🎁 **Hộp quà bất ngờ:** Khi mở lên sẽ có hộp quà xinh xắn mời em mở quà và tự động phát nhạc du dương.
+  - 🎂 **Thổi nến sinh nhật:** Bấm thổi nến kèm pháo hoa confetti rực rỡ và tiếng chuông may mắn.
+  - 💌 **Thư tình phong bao sáp:** Chạm để bóc dấu sáp và đọc từng dòng tâm sự ngọt ngào.
+  - 🎈 **Bong bóng tình yêu:** Chọc vỡ các quả bóng bay để thu thập 6 phiếu quà tặng độc quyền.
+  - 📸 **Góc ảnh kỷ niệm Polaroid:** Xem ảnh kỷ niệm đôi mình lãng mạn.
 
-1. Copy các tấm ảnh kỷ niệm của bạn vào thư mục:
-   `d:\happybirthday\images\` (ví dụ: `anh1.jpg`, `anh2.jpg`, `anh3.jpg`).
-2. Mở file `config.js` và cập nhật danh sách ảnh:
-   ```javascript
-   photos: [
-     {
-       src: "images/anh1.jpg",
-       caption: "Ngày đầu tiên gặp gỡ ☕💕",
-       date: "Kỷ niệm đáng nhớ"
-     },
-     {
-       src: "images/anh2.jpg",
-       caption: "Chuyến đi chơi của đôi mình 🌅",
-       date: "Mãi bên nhau"
-     }
-   ]
-   ```
-3. Sau đó bạn cũng có thể sửa tên người yêu, số ngày yêu nhau và nội dung bức thư tình ngay trong file `config.js`!
-Mọi thiết bị (iPhone, Android, MacBook) khi mở lên sẽ tự động hiển thị đầy đủ hình ảnh và lời chúc của bạn!
+---
+
+## 🛠️ Quản Lý Mã Nguồn Trên GitHub
+
+- Repository GitHub: **[https://github.com/NhanBTSE/happy-birthday](https://github.com/NhanBTSE/happy-birthday)**
+- GitHub Pages: **[https://nhanbtse.github.io/happy-birthday/](https://nhanbtse.github.io/happy-birthday/)**
+
+Nếu bạn muốn cập nhật thêm ảnh thật vào thư mục `images/` và đẩy lên:
+```bash
+git add .
+git commit -m "Cập nhật ảnh kỷ niệm mới"
+git push origin main
+```
+GitHub Pages sẽ tự động làm mới trang web trong vòng 1 phút! 💕
